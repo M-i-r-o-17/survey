@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="RU">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Опрос</title>
+    <link rel="stylesheet" href="./master.css">
+</head>
+<body>
+
+    <div class="main">
+
+        <div class="text_label">
+
+            Как Вам питание в школьной столовой?
+
+        </div>
+
+        <div class="variable">
+
+            <div class="smile pos">
+                <svg id="Flat" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+                    <path d="M128,24A104,104,0,1,0,232,128,104.12041,104.12041,0,0,0,128,24Zm36,72a12,12,0,1,1-12,12A12.0006,12.0006,0,0,1,164,96ZM92,96a12,12,0,1,1-12,12A12.0006,12.0006,0,0,1,92,96Zm84.5,60.00781a56.20543,56.20543,0,0,1-26.6875,23.58594A56.0807,56.0807,0,0,1,79.5,156.00781a7.99843,7.99843,0,1,1,13.84375-8.01562,40.274,40.274,0,0,0,19.09375,16.86719,40.44532,40.44532,0,0,0,31.14062,0,40.0058,40.0058,0,0,0,12.70313-8.57813,40.82317,40.82317,0,0,0,6.375-8.28906A7.99843,7.99843,0,1,1,176.5,156.00781Z"/>
+                </svg>
+            </div>
+
+            <div class="smile neg">
+                <svg id="Flat" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+                    <path d="M128,24A104,104,0,1,0,232,128,104.12041,104.12041,0,0,0,128,24Zm36,72a12,12,0,1,1-12,12A12.0006,12.0006,0,0,1,164,96ZM92,96a12,12,0,1,1-12,12A12.0006,12.0006,0,0,1,92,96Zm81.58594,86.92188a7.9139,7.9139,0,0,1-4,1.07812,7.99834,7.99834,0,0,1-6.92969-3.99219,40.42846,40.42846,0,0,0-6.375-8.29687,39.8432,39.8432,0,0,0-12.71094-8.57031,40.30551,40.30551,0,0,0-31.14062,0,40.11288,40.11288,0,0,0-19.07813,16.86718A8.00181,8.00181,0,0,1,79.5,171.99219a56.02208,56.02208,0,0,1,97,0A7.98921,7.98921,0,0,1,173.58594,182.92188Z"/>
+                </svg>
+            </div>
+
+        </div>
+
+
+        <div class="date">17  2024</div>
+
+        <div class="end_text">
+            Спасибо за ваш отзыв
+        </div>
+
+    </div>
+    
+</body>
+    <script type="text/javascript" src="/eel.js"></script>
+    <script type="text/javascript">
+
+        let currentDate = new Date();
+        let month = [
+            'Января', 'Февраля', 'Марта', 'Апреля', 'Мая', 'Июня', 'Июля', 'Августа', 'Сентября', 'Октября', 'Ноября', 'Декабря', 
+        ]
+        document.querySelector(".date").innerHTML = currentDate.getDate() + " " + month[currentDate.getMonth()] + " " + currentDate.getFullYear()
+
+        let pos = 0
+        let neg = 0
+
+        async function load_date(){
+            currentDate = new Date();
+            document.querySelector(".date").innerHTML = currentDate.getDate() + " " + month[currentDate.getMonth()] + " " + currentDate.getFullYear()
+            pos = await eel.pos(currentDate.getDate() + "." + currentDate.getMonth() + "." + currentDate.getFullYear())()
+            neg = await eel.neg(currentDate.getDate() + "." + currentDate.getMonth() + "." + currentDate.getFullYear())()
+        }
+
+        async function save_date(){
+            currentDate = new Date();
+            document.querySelector(".date").innerHTML = currentDate.getDate() + " " + month[currentDate.getMonth()] + " " + currentDate.getFullYear()
+            let py_data = await eel.save_date(currentDate.getDate() + "." + currentDate.getMonth() + "." + currentDate.getFullYear(), pos, neg)
+            load_date()
+        }
+
+        let background = document.querySelector("body")
+        let smile_pos = document.querySelector('.smile.pos');
+        let smile_neg = document.querySelector('.smile.neg');
+
+        let end_text = document.querySelector(".end_text")
+
+        let animated = false
+
+        load_date()
+
+        smile_pos.addEventListener("click", function() {
+
+            if(animated) return;
+            else animated = true
+
+            setTimeout(function(){
+                end_text.style.display = 'flex'
+                end_text.classList.add('end_text_animated');
+            }, 2000)
+
+            setTimeout(function(){
+                end_text.style.display = 'none'
+                smile_neg.classList.remove('smile_small_animate');
+                smile_pos.classList.remove('smile_big_animate');
+                background.classList.remove('main_background_green');
+                end_text.classList.remove('end_text_animated');
+                animated = false
+            }, 4000)
+
+            smile_neg.classList.add('smile_small_animate');
+            smile_pos.classList.add('smile_big_animate');
+            background.classList.add('main_background_green');
+
+            pos += 1
+
+            console.log(pos, neg)
+	    save_date()
+
+        });
+
+        smile_neg.addEventListener("click", function() {
+
+            if(animated) return;
+            else animated = true
+
+            setTimeout(function(){
+                end_text.style.display = 'flex'
+                end_text.classList.add('end_text_animated');
+            }, 2000)
+
+            setTimeout(function(){
+                end_text.style.display = 'none'
+                smile_neg.classList.remove('smile_big_animate');
+                smile_pos.classList.remove('smile_small_animate');
+                background.classList.remove('main_background_red');
+                end_text.classList.remove('end_text_animated');
+                animated = false
+            }, 4000)
+
+            smile_neg.classList.add('smile_big_animate');
+            smile_pos.classList.add('smile_small_animate');
+            background.classList.add('main_background_red');
+
+            neg += 1
+            console.log(pos, neg)
+	    save_date()
+        });
+        console.log(pos, neg)
+
+    </script>
+</html>

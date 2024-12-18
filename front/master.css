@@ -1,0 +1,133 @@
+.main{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-top: 25px;
+    justify-content: center;
+    align-items: center;
+}
+    .main .text_label{
+        width: 100%;
+        height: 64px;
+        font-size: 64px;
+        text-align: center;
+    }
+    .variable {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+    }
+
+        .smile{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            width: 40%;
+            height: auto;
+
+            padding: 1%;
+            margin: 15px;
+        }
+
+        .smile.pos{
+            fill: green;
+        }
+
+        .smile.neg{
+            fill: red;
+        }
+
+    .date {
+        width: 100%;
+        text-align: end;
+    }
+
+    .end_text{
+
+        min-height: 100vh;
+        display: none;
+        color: white;
+        position: absolute;
+        justify-content: center;
+        align-items: center;
+        font-size: 90pt;
+        font-weight: bold;
+
+    }
+
+    .smile_small_animate{
+        animation: 2s small_smile forwards;
+    }
+    .smile_big_animate{
+        animation: 3s big_smile forwards;
+    }
+    .main_background_green{
+        animation: 1s green_background forwards;
+    }
+
+    .main_background_red{
+        animation: 1s red_background forwards;
+    }
+
+    .end_text_animated{
+        animation: .5s transponent_text forwards;
+    }
+
+    @keyframes small_smile{
+
+        75%{
+            width: 0%;
+        }
+        100%{
+            width: 0%;
+            fill: transparent;
+        }
+    }
+
+    @keyframes big_smile{
+
+        50%{
+            fill: white;
+        }
+
+        100% {
+
+            fill: transparent;
+        }
+    }
+
+    @keyframes red_background{
+        0%{
+            color: black;
+            background-color: white;
+        }
+
+        100%{
+            color: white;
+            background-color: red;
+        }
+    }
+
+    @keyframes green_background{
+        0%{
+            color: black;
+            background-color: white;
+        }
+
+        100%{
+            color: white;
+            background-color: green;
+        }
+    }
+
+    @keyframes transponent_text{
+        0%{
+            color: transparent;
+        }
+        100%{
+            color: white;
+        }
+    }
+
