@@ -28,9 +28,6 @@ def load_date(filename:str):
     return nums
 
 
-if sys.platform == 'linux':
-    eel.browsers.set_path("chrome", "/usr/bin/firefox")
-
 eel.start('main.html', mode="chrome", size=(1920, 1080))
 
 

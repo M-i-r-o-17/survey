@@ -1,22 +1,48 @@
+*{
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
 .main{
+
     width: 100%;
+    height: 100vh;
+
     display: flex;
     flex-direction: column;
-    padding-top: 25px;
+
     justify-content: center;
     align-items: center;
 }
-    .main .text_label{
+    .main .title{
         width: 100%;
-        height: 64px;
+        height: 15%;
+
         font-size: 64px;
-        text-align: center;
-    }
-    .variable {
+        
         display: flex;
         align-items: center;
         justify-content: center;
+    }
+
+    .main .date{
+        width: 95%;
+        height: 5%;
+
+        
+        text-align: end;
+    }
+
+    .main .variable {
+
         width: 100%;
+        height: 80%;
+
+        display: flex;
+        
+        align-items: center;
+        justify-content: center;
+        
     }
 
         .smile{
@@ -39,21 +65,17 @@
             fill: red;
         }
 
-    .date {
-        width: 100%;
-        text-align: end;
-    }
-
-    .end_text{
+    .main .end_text{
 
         min-height: 100vh;
         display: none;
         color: white;
-        position: absolute;
         justify-content: center;
         align-items: center;
         font-size: 90pt;
         font-weight: bold;
+        width: 90%;
+        margin-left: 5%;
 
     }
 
@@ -73,6 +95,7 @@
 
     .end_text_animated{
         animation: .5s transponent_text forwards;
+        
     }
 
     @keyframes small_smile{
